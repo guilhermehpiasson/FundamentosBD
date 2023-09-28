@@ -1,4 +1,4 @@
-# Unidade III - Comandos SQL - Enfase no MySQL
+# Unidade I, II, III e IV - Comandos SQL - Enfase no MySQL
 
 Primeiro de tudo temos o SQL é dividido em 5 partes:
 - DDL **Data Definition Language** - Linguagem de Definição de Dados -  São os comandos que interagem com os objetos do banco.
