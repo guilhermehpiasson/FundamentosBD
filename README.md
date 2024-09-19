@@ -483,3 +483,99 @@ Assim eu consigo listar todos planetas mesmo que eles não tenham pessoas:
 | |Anakin |Tatooine |
 | |NULL   |Bespin   |
 | |NULL   |Coruscant|
+
+
+# Unidade I, II, III e IV - Administração de Banco de Dados
+
+Unidade I:
+
+```sql
+CREATE TABLE escolas(
+	cod_escola INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    cnpj_escola VARCHAR(14) NOT NULL,
+    nome_escola VARCHAR(100) NOT NULL,
+	data_fundacao_escola DATE
+);
+
+#Criação da tabela Salas
+CREATE TABLE salas(
+	num_sala INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    andar_sala VARCHAR(25) NOT NULL
+);
+
+#Criação da tabela Professores
+CREATE TABLE professores(
+	cod_professor INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    telefone_professor VARCHAR(17) NOT NULL,
+    nome_professor VARCHAR(100) NOT NULL,
+    data_admissao DATE NOT NULL,
+    email_professor VARCHAR(50) NOT NULL,
+	sexo_professor CHAR(1) NOT NULL,
+    cpf_professor VARCHAR(14) NOT NULL,
+    ativo BOOLEAN NOT NULL
+);
+
+#Criação da tabela Turmas
+CREATE TABLE turmas(
+	cod_turma INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome_turma VARCHAR(50) NOT NULL,
+    cod_escola INT NOT NULL REFERENCES escolas(cod_escola),
+    num_sala INT NOT NULL REFERENCES salas(num_salas)
+);
+
+#Criação da tabela Professor Turmas
+CREATE TABLE professor_turmas(
+	cod_professor_turmas INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    cod_turma INT NOT NULL REFERENCES turmas(cod_turma),
+    cod_professor INT NOT NULL REFERENCES professores(cod_professor)
+);
+
+#Inserção de dados na tabelas Escolas
+INSERT INTO escolas (nome_escola, cnpj_escola, data_fundacao_escola) VALUES ('Marechal Floriano','12345678901234','2000-08-06');
+INSERT INTO escolas (nome_escola, cnpj_escola, data_fundacao_escola) VALUES ('Colégio Notre Dame','23456789012345','1987-10-30');
+INSERT INTO escolas (nome_escola, cnpj_escola, data_fundacao_escola) VALUES ('Escola Célio Rodrigues','65678987623459','1996-11-08');
+INSERT INTO escolas (nome_escola, cnpj_escola, data_fundacao_escola) VALUES ('Colégio Santa Cecília','98760956256478','2003-05-30');
+INSERT INTO escolas (nome_escola, cnpj_escola, data_fundacao_escola) VALUES ('Instituto Joana D’Arc','78986545678567','1999-07-19');
+
+#Inserção de dados na tabela Salas
+INSERT INTO salas(andar_sala) values ('Sala 19A - 1ª Andar');
+INSERT INTO salas(andar_sala) values ('Sala 14B - 2ª Andar');
+INSERT INTO salas(andar_sala) values ('Sala 21B - 2ª Andar');
+INSERT INTO salas(andar_sala) values ('Sala 17C - 3ª Andar');
+
+#Inserção de dados na tabelas Turmas
+INSERT INTO turmas(nome_turma, cod_escola, num_sala) VALUES('AB-45',1,1);
+INSERT INTO turmas(nome_turma, cod_escola, num_sala) VALUES('AC-54',2,2);
+INSERT INTO turmas(nome_turma, cod_escola, num_sala) VALUES('BC-63',3,3);
+INSERT INTO turmas(nome_turma, cod_escola, num_sala) VALUES('DA-72',4,4);
+INSERT INTO turmas(nome_turma, cod_escola, num_sala) VALUES('BA-34',5,1);
+INSERT INTO turmas(nome_turma, cod_escola, num_sala) VALUES('AB-36',3,2);
+INSERT INTO turmas(nome_turma, cod_escola, num_sala) VALUES('DC-44',4,3);
+INSERT INTO turmas(nome_turma, cod_escola, num_sala) VALUES('AD-78',5,4);
+
+#Inserção de dados na tabelas Professores
+INSERT INTO professores(nome_professor, telefone_professor, email_professor, sexo_professor, cpf_professor, data_admissao, ativo)
+VALUES('Sibele Mueller','(49) 99876545','sibele.gti@faifaculdades.edu.br','F','05913425961','2014-02-18','1');
+INSERT INTO professores(nome_professor, telefone_professor, email_professor, sexo_professor, cpf_professor, data_admissao, ativo)
+VALUES('João Almeida','(55) 84567678','almeida@hotmail.com','M','18773435520','2016-08-09','1');
+INSERT INTO professores(nome_professor, telefone_professor, email_professor, sexo_professor, cpf_professor, data_admissao, ativo)
+VALUES('Camila Perreira','(55)92029987','camilap@gmail.com','F','28738433060','2007-01-30','0');
+INSERT INTO professores(nome_professor, telefone_professor, email_professor, sexo_professor, cpf_professor, data_admissao, ativo)
+VALUES('Pedro Fosqueira','(49)91345678','pedro@outlook.com','M','21492810150','2010-06-10','1');
+INSERT INTO professores(nome_professor, telefone_professor, email_professor, sexo_professor, cpf_professor, data_admissao, ativo)
+VALUES('Lucia Petry','(49)84650989','petryl@hotmail.com','F','47381476339','2013-08-15','0');
+
+#Inserção de dados na tabela Turmas
+INSERT INTO professor_turmas(cod_professor, cod_turma)values(1,1);
+INSERT INTO professor_turmas(cod_professor, cod_turma)values(2,2);
+INSERT INTO professor_turmas(cod_professor, cod_turma)values(1,3);
+INSERT INTO professor_turmas(cod_professor, cod_turma)values(2,4);
+INSERT INTO professor_turmas(cod_professor, cod_turma)values(4,5);
+INSERT INTO professor_turmas(cod_professor, cod_turma)values(4,6);
+INSERT INTO professor_turmas(cod_professor, cod_turma)values(1,1);
+INSERT INTO professor_turmas(cod_professor, cod_turma)values(2,2);
+INSERT INTO professor_turmas(cod_professor, cod_turma)values(2,1);
+INSERT INTO professor_turmas(cod_professor, cod_turma)values(2,2);
+INSERT INTO professor_turmas(cod_professor, cod_turma)values(4,3);
+INSERT INTO professor_turmas(cod_professor, cod_turma)values(1,5);
+```
